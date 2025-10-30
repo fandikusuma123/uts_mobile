@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe Aplikasi Furniture TA</title>
+    <style>
+        /* ========================================= */
+        /* Gaya Umum */
+        /* ========================================= */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background: #e9ecef; /* Latar belakang abu-abu muda */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            color: #343a40; /* Warna teks default */
+        }
+        .app-screen {
+            width: 375px; /* Lebar standar ponsel */
+            min-height: 700px;
+            background: white;
+            border: 1px solid #dee2e6; /* Border lebih halus */
+            margin-bottom: 30px; /* Jarak antar layar */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Bayangan lebih dramatis */
+            border-radius: 12px; /* Sudut lebih membulat */
+            overflow: hidden; /* Pastikan konten tidak meluber */
+            position: relative; /* Untuk positioning nav-bar */
+        }
+        .header {
+            padding: 18px 15px;
+            background: #4A2C2A; /* Warna cokelat tua */
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .header .icon-group a {
+            margin-left: 15px;
+            font-size: 1.1em;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #e9ecef;
+            background: white;
+            position: absolute; /* Tetap di bawah */
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+        }
+        .nav-bar.admin-nav {
+            background: #343a40; /* Warna gelap untuk admin nav */
+            border-top: 1px solid #495057;
+        }
+        .nav-item {
+            text-align: center;
+            color: #6c757d; /* Warna abu-abu sedang */
+            font-size: 0.85em;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
+            flex: 1; /* Agar item mengisi ruang secara merata */
+        }
+        .nav-item.active {
+            color: #8C6A4F; /* Warna cokelat hangat aktif */
+            font-weight: bold;
+        }
+        .nav-bar.admin-nav .nav-item {
+            color: #adb5bd; /* Warna abu-abu terang untuk admin nav */
+        }
+        .nav-bar.admin-nav .nav-item.active {
+            color: #ffc107; /* Warna kuning untuk admin nav aktif */
+        }
+        .nav-item span {
+            margin-top: 3px;
+        }
+        .content {
+            padding: 15px;
+            flex-grow: 1; /* Agar konten mengisi sisa ruang */
+            overflow-y: auto; /* Jika konten melebihi tinggi layar */
+            padding-bottom: 60px; /* Ruang untuk nav-bar */
+        }
+        h3 {
+            color: #4A2C2A;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+        .section-title {
+            color: #4A2C2A;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        /* ========================================= */
+        /* Gaya Khusus Halaman Autentikasi */
+        /* ========================================= */
+        .auth-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 700px;
+        }
+        .auth-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            width: 85%;
+            max-width: 300px;
+            text-align: center;
+        }
+        .auth-card h2 {
+            color: #4A2C2A;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+        .form-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+        .btn-auth-primary {
+            background: #8C6A4F;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background 0.3s ease;
+        }
+        .btn-auth-primary:hover {
+            background: #7a5c41;
+        }
+        .auth-link {
+            display: block;
+            margin-top: 20px;
+            color: #4A2C2A;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ========================================= */
+        /* Gaya Khusus Pelanggan */
+        /* ========================================= */
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .product-card {
+            border: 1px solid #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            background: #E8E2D7;
+            border-bottom: 1px solid #eee;
+        }
+        .product-card p {
+            margin: 8px 5px 0;
+            font-size: 0.95em;
+            color: #495057;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .price {
+            font-weight: bold;
+            color: #4A2C2A;
+            margin-top: 5px;
+            font-size: 1.1em;
+        }
+        .btn-add-cart {
+            background: #8C6A4F;
+            color: white;
+            border: none;
+            padding: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            width: calc(100% - 20px); /* Sesuaikan dengan padding card */
+            margin: 10px 10px 0;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+        .btn-add-cart:hover {
+            background: #7a5c41;
+        }
+
+        /* Gaya Monitoring */
+        .timeline {
+            border-left: 3px solid #ced4da; /* Garis timeline lebih tebal */
+            padding-left: 25px;
+            margin-top: 25px;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -40px; /* Sesuaikan posisi dot */
+            top: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #adb5bd; /* Warna default dot */
+            border: 4px solid white; /* Border putih */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .timeline-dot.done {
+            background: #28a745; /* Hijau untuk selesai */
+        }
+        .timeline-dot.active {
+            background: #ffc107; /* Kuning untuk aktif */
+        }
+        .status-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #343a40;
+        }
+        .status-date {
+            font-size: 0.85em;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+
+        /* ========================================= */
+        /* Gaya Khusus Admin */
+        /* ========================================= */
+        .admin-header {
+            background: #343a40; /* Header gelap */
+        }
+        .admin-stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .admin-stat {
+            background: #f8f9fa; /* Latar belakang stat yang lebih cerah */
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+        }
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #4A2C2A;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9em;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden; /* Untuk border-radius pada tabel */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .admin-table th, .admin-table td {
+            border: 1px solid #e9ecef;
+            padding: 10px 8px;
+            text-align: left;
+        }
+        .admin-table th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #495057;
+        }
+        .btn-action-group button {
+            margin-right: 5px;
+            padding: 6px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            font-size: 0.85em;
+            transition: opacity 0.3s ease;
+        }
+        .btn-action-group button:hover {
+            opacity: 0.8;
+        }
+        .btn-edit { background: #007bff; color: white; } /* Biru */
+        .btn-delete { background: #dc3545; color: white; } /* Merah */
+        .btn-detail { background: #6c757d; color: white; } /* Abu-abu */
+        .btn-add-item {
+            background: #28a745; /* Hijau */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: auto;
+            margin-top: 15px;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .btn-add-item:hover {
+            background: #218838;
+        }
+
+        /* Global buttons for navigating between mockups */
+        .mockup-nav {
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .mockup-nav-button {
+            padding: 12px 20px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .mockup-nav-button:hover {
+            background: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-screen auth-screen" id="login">
+        <div class="auth-card">
+            <h2>Masuk Akun</h2>
+            <div class="form-group">
+                <label for="login-email">Email</label>
+                <input type="email" id="login-email" placeholder="contoh@email.com">
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="********">
+            </div>
+            <a href="#customer-katalog" class="btn-auth-primary">Masuk</a>
+            <a href="#register" class="auth-link">Belum punya akun? Daftar</a>
+            <a href="#forgot-password" class="auth-link">Lupa Password?</a>
+        </div>
+    </div>
+
+    <div class="app-screen auth-screen" id="register">
+        <div class="auth-card">
+            <h2>Daftar Akun Baru</h2>
+            <div class="form-group">
+                <label for="reg-name">Nama Lengkap</label>
+                <input type="text" id="reg-name" placeholder="Nama Anda">
+            </div>
+            <div class="form-group">
+                <label for="reg-email">Email</label>
+                <input type="email" id="reg-email" placeholder="contoh@email.com">
+            </div>
+            <div class="form-group">
+                <label for="reg-password">Password</label>
+                <input type="password" id="reg-password" placeholder="Minimal 6 karakter">
+            </div>
+            <a href="#login" class="btn-auth-primary">Daftar</a>
+            <a href="#login" class="auth-link">Sudah punya akun? Masuk</a>
+        </div>
+    </div>
+
+    <div class="app-screen" id="customer-katalog">
+        <div class="header">
+            <span>🛋️ **Nama Aplikasi Furniture**</span>
+            <div class="icon-group">
+                <a href="#search">🔍</a>
+                <a href="#cart">🛒</a>
+            </div>
+        </div>
+        <div class="content">
+            <h3 class="section-title">Katalog Populer</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150x150/E8E2D7/4A2C2A?text=Sofa" alt="Sofa Minimalis">
+                    <p>Sofa Minimalis Abu</p>
+                    <p class="price">Rp 3.500.000</p>
+                    <button class="btn-add-cart">Tambah ke Keranjang</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150x150/E8E2D7/4A2C2A?text=Meja" alt="Meja Kayu">
+                    <p>Meja Kerja Kayu Jati</p>
+                    <p class="price">Rp 1.200.000</p>
+                    <button class="btn-add-cart">Tambah ke Keranjang</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150x150/E8E2D7/4A2C2A?text=Rak" alt="Rak Buku">
+                    <p>Rak Buku 5 Tingkat</p>
+                    <p class="price">Rp 850.000</p>
+                    <button class="btn-add-cart">Tambah ke Keranjang</button>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/150x150/E8E2D7/4A2C2A?text=Kursi" alt="Kursi Makan">
+                    <p>Set Kursi Makan (4)</p>
+                    <p class="price">Rp 4.000.000</p>
+                    <button class="btn-add-cart">Tambah ke Keranjang</button>
+                </div>
+            </div>
+        </div>
+        <div class="nav-bar">
+            <a href="#customer-katalog" class="nav-item active">🏠<span>Katalog</span></a>
+            <a href="#customer-monitoring" class="nav-item">📦<span>Pesanan</span></a>
+            <a href="#cart" class="nav-item">🛒<span>Keranjang</span></a>
+            <a href="#account" class="nav-item">👤<span>Akun</span></a>
+        </div>
+    </div>
+
+    <div class="app-screen" id="customer-monitoring">
+        <div class="header">
+            <a href="#customer-katalog">←</a>
+            <span>Detail Pesanan #P-20231029</span>
+            <span></span>
+        </div>
+        <div class="content">
+            <h3 class="section-title">Monitoring Proses Pengerjaan (P-5)</h3>
+            
+            <p style="font-size: 0.9em; color: #6c757d; margin-bottom: 20px;">Estimasi Selesai: **15 November 2025**</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot done">✔️</div>
+                    <div class="status-title">1. Konfirmasi Pembayaran</div>
+                    <div class="status-date">28 Okt 2025, 10:30 WIB</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot done">✔️</div>
+                    <div class="status-title">2. Persiapan Material</div>
+                    <div class="status-date">29 Okt 2025, 09:00 WIB</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot active">⚙️</div>
+                    <div class="status-title">3. **Proses Produksi**</div>
+                    <div class="status-date">Sedang Dikerjakan (Estimasi 7 Hari)</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">⏳</div>
+                    <div class="status-title">4. Quality Control</div>
+                    <div class="status-date">Menunggu...</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">🚚</div>
+                    <div class="status-title">5. Pengiriman</div>
+                    <div class="status-date">Menunggu...</div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-bar">
+            <a href="#customer-katalog" class="nav-item">🏠<span>Katalog</span></a>
+            <a href="#customer-monitoring" class="nav-item active">📦<span>Pesanan</span></a>
+            <a href="#cart" class="nav-item">🛒<span>Keranjang</span></a>
+            <a href="#account" class="nav-item">👤<span>Akun</span></a>
+        </div>
+    </div>
+
+    <div class="app-screen" id="admin-dashboard">
+        <div class="header admin-header">
+            <span>⚙️ **Dashboard Admin**</span>
+            <span><a href="#login" style="color: #ffc107; text-decoration: none; font-weight: normal;">👋 Keluar</a></span>
+        </div>
+        <div class="content">
+            <h3 class="section-title">Ringkasan Hari Ini</h3>
+            <div class="admin-stat-grid">
+                <div class="admin-stat">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">Pesanan Baru</div>
+                </div>
+                <div class="admin-stat">
+                    <div class="stat-value">Rp 12 Juta</div>
+                    <div class="stat-label">Total Penjualan</div>
+                </div>
+            </div>
+
+            <h3 class="section-title">Daftar Pesanan Baru (A-3)</h3>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Pelanggan</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>P-203</td>
+                        <td>Budi S.</td>
+                        <td><span style="color: #dc3545; font-weight: bold;">BARU</span></td>
+                        <td>
+                            <div class="btn-action-group">
+                                <button class="btn-detail">Detail</button>
+                                <button class="btn-edit">Proses</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>P-202</td>
+                        <td>Ani M.</td>
+                        <td><span style="color: #ffc107;">Diproses</span></td>
+                        <td>
+                            <div class="btn-action-group">
+                                <button class="btn-detail">Detail</button>
+                                <button class="btn-edit">Selesai</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>P-201</td>
+                        <td>Joko A.</td>
+                        <td><span style="color: #28a745;">Selesai</span></td>
+                        <td><button class="btn-detail">Lihat</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="section-title">CRUD Produk (A-2)</h3>
+            <a href="#add-product" class="btn-add-item">+ Tambah Produk Baru</a>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Stok</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>F-001</td>
+                        <td>Sofa Minimalis</td>
+                        <td>12</td>
+                        <td>
+                            <div class="btn-action-group">
+                                <button class="btn-edit">Edit</button>
+                                <button class="btn-delete">Hapus</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>F-002</td>
+                        <td>Meja Kerja Kayu</td>
+                        <td>5</td>
+                        <td>
+                            <div class="btn-action-group">
+                                <button class="btn-edit">Edit</button>
+                                <button class="btn-delete">Hapus</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="nav-bar admin-nav">
+            <a href="#admin-dashboard" class="nav-item active">📊<span>Dashboard</span></a>
+            <a href="#admin-products" class="nav-item">🗄️<span>Produk</span></a>
+            <a href="#admin-monitoring" class="nav-item">⚙️<span>Monitoring</span></a>
+            <a href="#admin-reviews" class="nav-item">⭐<span>Ulasan</span></a>
+        </div>
+    </div>
+
+    <div class="mockup-nav">
+        <a href="#login" class="mockup-nav-button">Halaman Login</a>
+        <a href="#register" class="mockup-nav-button">Halaman Register</a>
+        <a href="#customer-katalog" class="mockup-nav-button">Katalog Pelanggan</a>
+        <a href="#customer-monitoring" class="mockup-nav-button">Monitoring Pelanggan</a>
+        <a href="#admin-dashboard" class="mockup-nav-button">Dashboard Admin</a>
+    </div>
+
+</body>
+</html>
