@@ -63,14 +63,14 @@ Dokumen ini mendefinisikan persyaratan fungsional dan non-fungsional untuk penge
 * Pencarian produk: $\le 2$ detik.
 
 ### 4.2 Persyaratan Keamanan (Security)
-* Semua password user harus di-hash (misal: menggunakan algoritma BCrypt).
+* Semua password user harus di-hash 
 * Komunikasi client-server menggunakan HTTPS/SSL.
 * Implementasi Role-Based Access Control (RBAC) untuk pemisahan akses Pelanggan dan Admin.
 
 ### 4.3 Persyaratan Teknologi
 * **Framework:** Flutter.
 * **Bahasa:** Dart.
-* **Backend & DB:** [AppwriteL].
+* **Backend & DB:** [Appwrite].
 * **State Management:** [Provider.]
 
 ---
