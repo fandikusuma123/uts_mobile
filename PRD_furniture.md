@@ -1,9 +1,11 @@
-# PRODUCT REQUIREMENTS DOCUMENT (PRD)
+# DOKUMEN PERSYARATAN PRODUK (PRD)
 
-## Nama Produk: Aplikasi Furniture [ff furniture]
-**Versi:** 1.0
-**Tanggal Dibuat:** [oktober]
-**Pembuat:** [Muhammad Fandi Kusuma, Muhammad Fachri HUsaini]
+## Nama Produk: Aplikasi Furniture [tripel f]
+
+**Versi:** 1.1 (Final)
+**Tanggal Dibuat:** 31 Oktober 2025
+**Pembuat:** [-Muhammad Fandi Kusuma(221240001295)]
+            [-Muhammad Fahcri Husaini(221240001286)]
 
 ---
 
@@ -37,6 +39,7 @@ Dokumen ini mendefinisikan persyaratan fungsional dan non-fungsional untuk penge
 | P-2 | **Katalog Produk** | Menampilkan produk dengan filter dan pencarian. | Data diambil dari DB Produk. |
 | P-3 | **Pemesanan Barang** | Memilih produk, menentukan kuantitas. | Logika pengecekan stok. |
 | P-4 | **Keranjang Belanja** | Daftar item, ubah kuantitas, hitung subtotal, checkout. | Kalkulasi dinamis harga total. |
+| **P-7** | **Kalkulasi Biaya Admin** | **Menerapkan biaya admin sebesar 5% dari subtotal pesanan (sebelum ongkos kirim) pada proses checkout.** | Logika kalkulasi harga total: `Total = Subtotal Produk + Biaya Admin (5% dari Subtotal) + Ongkos Kirim`. |
 | P-5 | **Monitoring Pengerjaan** | Menampilkan detail pesanan dan status proses pengerjaan (Timeline/Stepper). | Data status diambil real-time dari DB Pesanan. |
 | P-6 | **Rating & Ulasan** | Memberikan bintang (1-5) dan komentar untuk produk yang telah selesai/diterima. | Menyimpan data rating ke DB Ulasan. |
 
@@ -60,15 +63,15 @@ Dokumen ini mendefinisikan persyaratan fungsional dan non-fungsional untuk penge
 * Pencarian produk: $\le 2$ detik.
 
 ### 4.2 Persyaratan Keamanan (Security)
-* Semua password user harus di-hash  menggunakan algoritma BCrypt.
+* Semua password user harus di-hash (misal: menggunakan algoritma BCrypt).
 * Komunikasi client-server menggunakan HTTPS/SSL.
 * Implementasi Role-Based Access Control (RBAC) untuk pemisahan akses Pelanggan dan Admin.
 
 ### 4.3 Persyaratan Teknologi
 * **Framework:** Flutter.
 * **Bahasa:** Dart.
-* **Backend & DB:** [Appwrite].
-* **State Management:** [Provider].
+* **Backend & DB:** [AppwriteL].
+* **State Management:** [Provider.]
 
 ---
 
@@ -78,7 +81,7 @@ Dokumen ini mendefinisikan persyaratan fungsional dan non-fungsional untuk penge
 | :--- | :--- | :--- |
 | **User** | `id`, `nama`, `email`, `password_hash`, `role`. | Autentikasi. |
 | **Produk** | `id`, `nama_produk`, `harga`, `stok`, `gambar_url`. | Katalog. |
-| **Pesanan** | `id_pesanan`, `id_user`, `tanggal`, `total_bayar`, `status_proses`. | Riwayat dan Monitoring. |
+| **Pesanan** | `id_pesanan`, `id_user`, `tanggal`, **`subtotal_produk`**, **`biaya_admin`**, `total_bayar`, `status_proses`. | Riwayat, Monitoring, dan detail Biaya. |
 | **Ulasan** | `id`, `id_produk`, `id_user`, `rating_bintang`, `komentar`. | Rating Penjualan. |
 
 ---
